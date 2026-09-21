@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './TextInput.css'
 
 // 이론 2챕터 Props: 부모(App)가 내려준 onAdd 함수를 구조 분해 할당으로 받음
 interface TextInputProps {
@@ -25,39 +26,24 @@ function TextInput({ onAdd }: TextInputProps) {
   }
 
   return (
-    <div style={{ marginBottom: '24px' }}>
-      <div style={{ display: 'flex', gap: '8px' }}>
+    <div className="input-card">
+      <div className="input-row">
         <input
           type="text"
           value={value}
           onChange={e => setValue(e.target.value)}  // 입력할 때마다 state 업데이트
           onKeyDown={handleKeyDown}
           placeholder="할 일을 입력하세요"
-          style={{
-            flex: 1,
-            padding: '8px 12px',
-            fontSize: '16px',
-            border: `1px solid ${isOver ? 'red' : '#ccc'}`,
-            borderRadius: '6px',
-          }}
+          className={`todo-input${isOver ? ' over' : ''}`}
         />
         {/* 이론 1챕터 논리 연산자 &&: isOver이거나 isEmpty일 때만 disabled */}
-        <button
-          onClick={handleAdd}
-          disabled={isOver || isEmpty}
-          style={{
-            padding: '8px 16px',
-            fontSize: '16px',
-            cursor: isOver || isEmpty ? 'not-allowed' : 'pointer',
-            borderRadius: '6px',
-          }}
-        >
+        <button onClick={handleAdd} disabled={isOver || isEmpty} className="add-btn">
           추가
         </button>
       </div>
 
       {/* 이론 1챕터 템플릿 리터럴: 글자 수 표시 */}
-      <p style={{ fontSize: '13px', color: isOver ? 'red' : '#888', marginTop: '4px' }}>
+      <p className={`char-count${isOver ? ' over' : ''}`}>
         {value.length} / {MAX}자
         {/* 이론 1챕터 논리 연산자 &&: isOver가 true일 때만 경고 문구 출력 */}
         {isOver && ' — 20자를 초과했습니다!'}

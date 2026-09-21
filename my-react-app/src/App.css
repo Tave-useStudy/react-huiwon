@@ -1,1 +1,15 @@
-/* 기본 Vite 스타일 제거 후 투두리스트용 초기화 */
+.app-container {
+  max-width: 600px;
+  margin: 48px auto;
+  padding: 0 20px 60px;
+}
+
+.app-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 24px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  letter-spacing: -0.5px;
+}
