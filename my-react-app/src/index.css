@@ -4,8 +4,10 @@
 
 body {
   margin: 0;
-  font-family: sans-serif;
-  background: #f9f9f9;
+  font-family: 'Pretendard Variable', 'Pretendard', 'Segoe UI', -apple-system, sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #6d5bff 0%, #9c6bff 45%, #ff8bd0 100%);
+  background-attachment: fixed;
 }
 
 button {
@@ -15,6 +17,7 @@ button {
   background: #fff;
   cursor: pointer;
   font-size: 14px;
+  font-family: inherit;
 }
 
 button:disabled {

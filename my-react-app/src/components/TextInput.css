@@ -1,0 +1,67 @@
+.input-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  border-radius: 18px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 24px rgba(60, 30, 110, 0.18);
+}
+
+.input-row {
+  display: flex;
+  gap: 10px;
+}
+
+.todo-input {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 15px;
+  border: 2px solid #eae5fb;
+  border-radius: 12px;
+  outline: none;
+  background: #faf9ff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.todo-input:focus {
+  border-color: #a78bfa;
+  box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.15);
+}
+
+.todo-input.over {
+  border-color: #ff5c8a;
+}
+
+.add-btn {
+  border: none;
+  border-radius: 12px;
+  padding: 0 22px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #7c5cff, #ff6bb0);
+  box-shadow: 0 4px 14px rgba(124, 92, 255, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.add-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(124, 92, 255, 0.45);
+}
+
+.add-btn:disabled {
+  background: #d8d3ec;
+  box-shadow: none;
+  color: #fff;
+}
+
+.char-count {
+  font-size: 12px;
+  color: #a89fc2;
+  margin: 8px 0 0;
+}
+
+.char-count.over {
+  color: #ff5c8a;
+  font-weight: 600;
+}

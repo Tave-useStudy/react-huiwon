@@ -2,12 +2,8 @@ import { useState } from 'react'
 import TextInput from './components/TextInput'
 import TaskList from './components/TaskList'
 import UserProfile from './components/UserProfile'
-
-interface Todo {
-  id: number
-  text: string
-  done: boolean
-}
+import type { Todo } from './types'
+import './App.css'
 
 function App() {
   // 이론 3챕터 useState: todos 배열 전체를 App에서 관리
@@ -34,8 +30,8 @@ function App() {
   }
 
   return (
-    <div style={{ maxWidth: '600px', margin: '40px auto', padding: '0 20px' }}>
-      <h1>할 일 목록</h1>
+    <div className="app-container">
+      <h1 className="app-title">✨ 할 일 목록</h1>
       {/* 이론 2챕터 Props: 부모 → 자식으로 데이터와 함수 전달 */}
       <UserProfile />
       <TextInput onAdd={addTodo} />

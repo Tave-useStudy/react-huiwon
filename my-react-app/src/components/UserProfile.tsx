@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import './UserProfile.css'
 
 interface User {
   name: { first: string; last: string }
@@ -33,38 +34,24 @@ function UserProfile() {
   }, [])
 
   return (
-    <div style={{
-      border: '1px solid #ddd',
-      borderRadius: '10px',
-      padding: '16px',
-      marginBottom: '24px',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '16px',
-    }}>
+    <div className="profile-card">
       {loading ? (
         <p>불러오는 중...</p>
       ) : (
         <>
           {/* 이론 1챕터 옵셔널 체이닝 ?.: user가 null일 때 에러 없이 undefined 반환 */}
-          <img
-            src={user?.picture.medium}
-            alt="프로필"
-            style={{ borderRadius: '50%', width: '60px', height: '60px' }}
-          />
+          <img src={user?.picture.medium} alt="프로필" className="profile-avatar" />
           <div>
-            <p style={{ margin: 0, fontWeight: 'bold' }}>
+            <p className="profile-name">
               {user?.name.first} {user?.name.last}
             </p>
-            <p style={{ margin: 0, color: '#888', fontSize: '14px' }}>
-              {user?.email}
-            </p>
+            <p className="profile-email">{user?.email}</p>
           </div>
         </>
       )}
 
       {/* 새로고침 버튼: fetchUser 재호출 → 새 유저 정보 표시 */}
-      <button onClick={fetchUser} style={{ marginLeft: 'auto' }}>
+      <button onClick={fetchUser} className="profile-refresh-btn">
         새로고침
       </button>
     </div>
