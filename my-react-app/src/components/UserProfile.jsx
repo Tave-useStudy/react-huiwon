@@ -1,15 +1,9 @@
 import { useState, useEffect } from 'react'
 import './UserProfile.css'
 
-interface User {
-  name: { first: string; last: string }
-  email: string
-  picture: { medium: string }
-}
-
 function UserProfile() {
   // 이론 3챕터 useState: 유저 데이터와 로딩 상태를 state로 관리
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(false)
 
   // 이론 1챕터 비동기 async/await: fetch로 API 호출

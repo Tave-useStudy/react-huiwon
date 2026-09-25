@@ -1,14 +1,7 @@
-import type { Todo } from '../types'
 import './TaskList.css'
 
-interface TaskListProps {
-  todos: Todo[]
-  onToggle: (id: number) => void
-  onDelete: (id: number) => void
-}
-
 // 이론 1챕터 구조 분해 할당: props를 { todos, onToggle, onDelete }로 바로 꺼냄
-function TaskList({ todos, onToggle, onDelete }: TaskListProps) {
+function TaskList({ todos, onToggle, onDelete }) {
   if (todos.length === 0) {
     return (
       <div className="todo-list-card">

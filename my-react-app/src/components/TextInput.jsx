@@ -2,11 +2,7 @@ import { useState } from 'react'
 import './TextInput.css'
 
 // 이론 2챕터 Props: 부모(App)가 내려준 onAdd 함수를 구조 분해 할당으로 받음
-interface TextInputProps {
-  onAdd: (text: string) => void
-}
-
-function TextInput({ onAdd }: TextInputProps) {
+function TextInput({ onAdd }) {
   // 이론 3챕터 useState: 입력창 값을 state로 관리
   const [value, setValue] = useState('')
 
@@ -21,7 +17,7 @@ function TextInput({ onAdd }: TextInputProps) {
   }
 
   // Enter 키 처리
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e) => {
     if (e.key === 'Enter') handleAdd()
   }
 
