@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { CheckCircle2, Circle, MoreVertical, Pencil, Trash2 } from 'lucide-react'
+import { CATEGORIES, CATEGORY_STYLE } from '../constants/categories'
 import './TodoItem.css'
 
 function TodoItem({ todo, onToggle, onDelete, onUpdate }) {
@@ -58,9 +59,24 @@ function TodoItem({ todo, onToggle, onDelete, onUpdate }) {
           autoFocus
         />
       ) : (
-        <span className={`todo-text${todo.done ? ' done' : ''}`}>
-          {todo.text}
-        </span>
+        <div className="todo-text-wrapper">
+          {/* 카테고리 뱃지 */}
+          {todo.category && (() => {
+            const style = CATEGORY_STYLE[todo.category]
+            const label = CATEGORIES.find(c => c.value === todo.category)?.label
+            return (
+              <span
+                className="category-badge"
+                style={{ background: style?.bg, color: style?.text }}
+              >
+                {label}
+              </span>
+            )
+          })()}
+          <span className={`todo-text${todo.done ? ' done' : ''}`}>
+            {todo.text}
+          </span>
+        </div>
       )}
 
       {isEditing ? (
