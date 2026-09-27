@@ -28,13 +28,20 @@ function App() {
     setTodos(todos.filter(todo => todo.id !== id))
   }
 
+  // 이론 2챕터 불변성: map()으로 새 배열 생성, 해당 항목만 text 교체
+  const updateTodo = (id, newText) => {
+    setTodos(todos.map(todo =>
+      todo.id === id ? { ...todo, text: newText } : todo
+    ))
+  }
+
   return (
     <div className="app-container">
-      <h1 className="app-title">✨ 할 일 목록</h1>
+      <h1 className="app-title">TODO-LIST</h1>
       {/* 이론 2챕터 Props: 부모 → 자식으로 데이터와 함수 전달 */}
       <UserProfile />
       <TextInput onAdd={addTodo} />
-      <TaskList todos={todos} onToggle={toggleTodo} onDelete={deleteTodo} />
+      <TaskList todos={todos} onToggle={toggleTodo} onDelete={deleteTodo} onUpdate={updateTodo} />
     </div>
   )
 }

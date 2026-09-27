@@ -1,3 +1,5 @@
+@import './styles/colors.css';
+
 * {
   box-sizing: border-box;
 }
@@ -6,7 +8,7 @@ body {
   margin: 0;
   font-family: 'Pretendard Variable', 'Pretendard', 'Segoe UI', -apple-system, sans-serif;
   min-height: 100vh;
-  background: linear-gradient(135deg, #6d5bff 0%, #9c6bff 45%, #ff8bd0 100%);
+  background: var(--neutral-100);
   background-attachment: fixed;
 }
 
