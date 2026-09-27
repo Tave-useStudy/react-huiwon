@@ -24,6 +24,7 @@
   align-items: center;
   gap: 8px;
   min-width: 0;
+  cursor: pointer;
 }
 
 .category-badge {

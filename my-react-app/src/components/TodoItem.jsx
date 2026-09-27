@@ -1,10 +1,12 @@
 import { useState, useRef, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { CheckCircle2, Circle, MoreVertical, Pencil, Trash2 } from 'lucide-react'
 import { CATEGORIES, CATEGORY_STYLE } from '../constants/categories'
 import { PRIORITY_COLOR } from '../constants/priorities'
 import './TodoItem.css'
 
 function TodoItem({ todo, onToggle, onDelete, onUpdate }) {
+  const navigate = useNavigate()
   const [isEditing, setIsEditing] = useState(false)
   const [editText, setEditText] = useState(todo.text)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -68,7 +70,7 @@ function TodoItem({ todo, onToggle, onDelete, onUpdate }) {
           autoFocus
         />
       ) : (
-        <div className="todo-text-wrapper">
+        <div className="todo-text-wrapper" onClick={() => navigate(`/todo/${todo.id}`)}>
           {/* 카테고리 뱃지 */}
           {todo.category && (() => {
             const style = CATEGORY_STYLE[todo.category]
