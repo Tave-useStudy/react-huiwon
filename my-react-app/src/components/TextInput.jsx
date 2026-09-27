@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { CATEGORIES } from '../constants/categories'
+import { PRIORITIES } from '../constants/priorities'
 import './TextInput.css'
 
 // 이론 2챕터 Props: 부모(App)가 내려준 onAdd 함수를 구조 분해 할당으로 받음
@@ -7,6 +8,7 @@ function TextInput({ onAdd }) {
   // 이론 3챕터 useState: 입력창 값을 state로 관리
   const [value, setValue] = useState('')
   const [category, setCategory] = useState(CATEGORIES[0].value)
+  const [priority, setPriority] = useState(PRIORITIES[1].value)  // 기본값: 보통
 
   const MAX = 20
   const isOver = value.length > MAX
@@ -14,7 +16,7 @@ function TextInput({ onAdd }) {
 
   const handleAdd = () => {
     if (isOver || isEmpty) return
-    onAdd(value.trim(), category)  // 텍스트와 카테고리를 함께 전달
+    onAdd(value.trim(), category, priority)
     setValue('')
   }
 
@@ -25,13 +27,22 @@ function TextInput({ onAdd }) {
   return (
     <div className="input-card">
       <div className="input-row">
-        {/* 카테고리 select */}
         <select
           value={category}
           onChange={e => setCategory(e.target.value)}
           className="category-select"
         >
           {CATEGORIES.map(({ value, label }) => (
+            <option key={value} value={value}>{label}</option>
+          ))}
+        </select>
+
+        <select
+          value={priority}
+          onChange={e => setPriority(e.target.value)}
+          className="category-select"
+        >
+          {PRIORITIES.map(({ value, label }) => (
             <option key={value} value={value}>{label}</option>
           ))}
         </select>

@@ -6,8 +6,10 @@
 }
 
 .filter-btn {
+  flex: 1;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 5px;
   border: 1.5px solid var(--neutral-200);
   border-radius: 999px;

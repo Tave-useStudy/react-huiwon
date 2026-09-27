@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { CheckCircle2, Circle, MoreVertical, Pencil, Trash2 } from 'lucide-react'
 import { CATEGORIES, CATEGORY_STYLE } from '../constants/categories'
+import { PRIORITY_COLOR } from '../constants/priorities'
 import './TodoItem.css'
 
 function TodoItem({ todo, onToggle, onDelete, onUpdate }) {
@@ -50,6 +51,14 @@ function TodoItem({ todo, onToggle, onDelete, onUpdate }) {
 
   return (
     <li className="todo-item">
+      {/* 우선순위 컬러 도트 */}
+      {!isEditing && (
+        <span
+          className="priority-dot"
+          style={{ background: PRIORITY_COLOR[todo.priority] ?? PRIORITY_COLOR.medium }}
+        />
+      )}
+
       {isEditing ? (
         <input
           className="todo-edit-input"
@@ -86,15 +95,10 @@ function TodoItem({ todo, onToggle, onDelete, onUpdate }) {
         </>
       ) : (
         <>
-          {/* 완료 체크 아이콘 버튼 */}
           <button onClick={() => onToggle(todo.id)} className={`check-btn${todo.done ? ' checked' : ''}`}>
-            {todo.done
-              ? <CheckCircle2 size={22} />
-              : <Circle size={22} />
-            }
+            {todo.done ? <CheckCircle2 size={22} /> : <Circle size={22} />}
           </button>
 
-          {/* 더보기 아이콘 버튼 + 드롭다운 메뉴 */}
           <div className="menu-wrapper" ref={menuRef}>
             <button onClick={() => setIsMenuOpen(v => !v)} className="more-btn">
               <MoreVertical size={20} />
