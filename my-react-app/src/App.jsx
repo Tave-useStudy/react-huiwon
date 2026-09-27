@@ -62,11 +62,14 @@ function App() {
       {/* 이론 2챕터 Props: 부모 → 자식으로 데이터와 함수 전달 */}
       <UserProfile />
       <TextInput onAdd={addTodo} />
-      <FilterBar todos={todos} activeCategory={activeCategory} onFilter={setActiveCategory} />
-      <div className="sort-row">
-        <SortBar sortBy={sortBy} onSort={setSortBy} />
+      <div className="todo-section">
+        <div className="todo-section-header">
+          <h2 className="todo-section-title">업무별 todo-list</h2>
+          <SortBar sortBy={sortBy} onSort={setSortBy} />
+        </div>
+        <FilterBar todos={todos} activeCategory={activeCategory} onFilter={setActiveCategory} />
+        <TaskList todos={sortedTodos} onToggle={toggleTodo} onDelete={deleteTodo} onUpdate={updateTodo} />
       </div>
-      <TaskList todos={sortedTodos} onToggle={toggleTodo} onDelete={deleteTodo} onUpdate={updateTodo} />
     </div>
   )
 }

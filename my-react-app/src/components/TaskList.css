@@ -1,8 +1,5 @@
 .todo-list-card {
-  background: var(--white);
-  backdrop-filter: blur(8px);
-  border-radius: 18px;
-  padding: 8px 20px;
+  padding: 0;
 }
 
 .todo-list {

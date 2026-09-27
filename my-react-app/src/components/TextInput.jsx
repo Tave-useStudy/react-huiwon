@@ -26,6 +26,7 @@ function TextInput({ onAdd }) {
 
   return (
     <div className="input-card">
+      <h2 className="input-title">todo-list 추가하기</h2>
       <div className="input-row">
         <select
           value={category}
