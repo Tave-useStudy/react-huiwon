@@ -1,35 +1,63 @@
 .input-card {
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--white);
   backdrop-filter: blur(8px);
   border-radius: 18px;
   padding: 18px 20px;
   margin-bottom: 20px;
-  box-shadow: 0 8px 24px rgba(60, 30, 110, 0.18);
+}
+
+.input-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--neutral-700);
+  margin: 0 0 14px;
 }
 
 .input-row {
   display: flex;
   gap: 10px;
+  align-items: stretch;
+}
+
+.category-select {
+  padding: 10px 32px 10px 12px;
+  font-size: 15px;
+  font-weight: 500;
+  border: 1px solid var(--neutral-300);
+  border-radius: 12px;
+  outline: none;
+  background-color: var(--neutral-50);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  appearance: none;
+  color: var(--neutral-700);
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+  flex-shrink: 0;
+}
+
+.category-select:focus {
+  border-color: var(--blue-500);
 }
 
 .todo-input {
   flex: 1;
   padding: 12px 16px;
   font-size: 15px;
-  border: 2px solid #eae5fb;
+  border: 1px solid var(--neutral-300);
   border-radius: 12px;
   outline: none;
-  background: #faf9ff;
+  background: var(--white);
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .todo-input:focus {
-  border-color: #a78bfa;
-  box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.15);
+  border-color: var(--blue-500);
 }
 
 .todo-input.over {
-  border-color: #ff5c8a;
+  border-color: var(--red-500);
 }
 
 .add-btn {
@@ -39,29 +67,29 @@
   font-size: 15px;
   font-weight: 700;
   color: #fff;
-  background: linear-gradient(135deg, #7c5cff, #ff6bb0);
-  box-shadow: 0 4px 14px rgba(124, 92, 255, 0.35);
+  background: linear-gradient(135deg, var(--blue-600), var(--blue-400));
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
   transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
 }
 
 .add-btn:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(124, 92, 255, 0.45);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.45);
 }
 
 .add-btn:disabled {
-  background: #d8d3ec;
+  background: var(--neutral-400);
   box-shadow: none;
   color: #fff;
 }
 
 .char-count {
   font-size: 12px;
-  color: #a89fc2;
+  color: var(--neutral-400);
   margin: 8px 0 0;
 }
 
 .char-count.over {
-  color: #ff5c8a;
+  color: var(--red-500);
   font-weight: 600;
 }

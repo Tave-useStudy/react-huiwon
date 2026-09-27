@@ -1,0 +1,183 @@
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--blue-100);
+  transition: opacity 0.2s ease;
+}
+
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+.priority-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.todo-text-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.category-badge {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
+.todo-text {
+  font-size: 15px;
+  color: var(--neutral-900);
+  transition: color 0.2s ease;
+  word-break: break-word;
+  min-width: 0;
+}
+
+.todo-text.done {
+  text-decoration: line-through;
+  color: var(--neutral-300);
+}
+
+/* 완료 체크 버튼 */
+.check-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  padding: 4px;
+  cursor: pointer;
+  color: var(--neutral-300);
+  transition: color 0.15s ease, transform 0.15s ease;
+  flex-shrink: 0;
+}
+
+.check-btn:hover {
+  color: var(--green-500);
+  transform: scale(1.1);
+}
+
+.check-btn.checked {
+  color: var(--green-500);
+}
+
+.check-btn.checked:hover {
+  color: var(--neutral-400);
+}
+
+/* 더보기 버튼 */
+.more-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  padding: 4px;
+  cursor: pointer;
+  color: var(--neutral-400);
+  transition: color 0.15s ease;
+  flex-shrink: 0;
+}
+
+.more-btn:hover {
+  color: var(--neutral-600);
+}
+
+/* 드롭다운 메뉴 */
+.menu-wrapper {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  background: var(--white);
+  border: 1px solid var(--neutral-200);
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  z-index: 10;
+  min-width: 96px;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 14px;
+  border: none;
+  background: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--neutral-700);
+  cursor: pointer;
+  transition: background 0.1s ease;
+  text-align: left;
+}
+
+.dropdown-item:hover {
+  background: var(--neutral-100);
+}
+
+.dropdown-item.danger {
+  color: var(--red-500);
+}
+
+.dropdown-item.danger:hover {
+  background: var(--red-50);
+}
+
+/* 편집 모드 */
+.save-btn,
+.cancel-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.save-btn {
+  background: var(--blue-100);
+  color: var(--blue-600);
+}
+
+.save-btn:hover {
+  background: var(--blue-200);
+  transform: translateY(-1px);
+}
+
+.cancel-btn {
+  background: var(--neutral-100);
+  color: var(--neutral-500);
+}
+
+.cancel-btn:hover {
+  background: var(--neutral-200);
+  transform: translateY(-1px);
+}
+
+.todo-edit-input {
+  flex: 1;
+  border: 1.5px solid var(--blue-500);
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 15px;
+  color: var(--blue-900);
+  outline: none;
+  background: var(--blue-50);
+}

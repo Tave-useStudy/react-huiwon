@@ -4,12 +4,32 @@
   padding: 0 20px 60px;
 }
 
+.todo-section {
+  background: var(--white);
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.todo-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.todo-section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--neutral-700);
+  margin: 0;
+}
+
 .app-title {
   text-align: center;
   font-size: 32px;
-  font-weight: 800;
-  color: #fff;
+  font-weight: 600;
+  color: var(--neutral-900);
   margin: 0 0 24px;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
   letter-spacing: -0.5px;
 }

@@ -1,41 +1,23 @@
-import { useState } from 'react'
-import TextInput from './components/TextInput'
-import TaskList from './components/TaskList'
-import UserProfile from './components/UserProfile'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { TodoProvider } from './context/TodoContext'
+import Navbar from './components/Navbar'
+import MainPage from './pages/MainPage'
+import TodoDetailPage from './pages/TodoDetailPage'
+import SettingsPage from './pages/SettingsPage'
 import './App.css'
 
 function App() {
-  // 이론 3챕터 useState: todos 배열 전체를 App에서 관리
-  // TextInput이랑 TaskList가 같은 데이터를 공유하려면
-  // 공통 부모인 App에서 state를 들고 있어야 함 (단방향 데이터 흐름)
-  const [todos, setTodos] = useState([])
-
-  // 이론 2챕터 불변성: push() 대신 [...todos, 새항목] 으로 새 배열 생성
-  const addTodo = (text) => {
-    const newTodo = { id: Date.now(), text, done: false }
-    setTodos([...todos, newTodo])
-  }
-
-  // 이론 2챕터 불변성: map()으로 새 배열 생성, 해당 항목만 done 반전
-  const toggleTodo = (id) => {
-    setTodos(todos.map(todo =>
-      todo.id === id ? { ...todo, done: !todo.done } : todo
-    ))
-  }
-
-  // 이론 1챕터 배열 고차함수: filter()로 해당 id 제외한 새 배열 반환
-  const deleteTodo = (id) => {
-    setTodos(todos.filter(todo => todo.id !== id))
-  }
-
   return (
-    <div className="app-container">
-      <h1 className="app-title">✨ 할 일 목록</h1>
-      {/* 이론 2챕터 Props: 부모 → 자식으로 데이터와 함수 전달 */}
-      <UserProfile />
-      <TextInput onAdd={addTodo} />
-      <TaskList todos={todos} onToggle={toggleTodo} onDelete={deleteTodo} />
-    </div>
+    <TodoProvider>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/todo/:id" element={<TodoDetailPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
+        </Routes>
+      </BrowserRouter>
+    </TodoProvider>
   )
 }
 
