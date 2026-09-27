@@ -4,6 +4,7 @@ import TaskList from './components/TaskList'
 import UserProfile from './components/UserProfile'
 import FilterBar from './components/FilterBar'
 import SortBar from './components/SortBar'
+import StatusFilter from './components/StatusFilter'
 import { ALL } from './constants/categories'
 import { PRIORITIES } from './constants/priorities'
 import './App.css'
@@ -16,6 +17,7 @@ function App() {
   const [todos, setTodos] = useState([])
   const [activeCategory, setActiveCategory] = useState(ALL)
   const [sortBy, setSortBy] = useState('newest')
+  const [activeStatus, setActiveStatus] = useState('all')
 
   // 이론 2챕터 불변성: push() 대신 [...todos, 새항목] 으로 새 배열 생성
   const addTodo = (text, category, priority) => {
@@ -56,12 +58,19 @@ function App() {
     return 0
   })
 
+  // derived state: todos에서 완료 상태로 필터링
+  const statusFilteredTodos = activeStatus === 'all'
+    ? todos
+    : todos.filter(todo => activeStatus === 'done' ? todo.done : !todo.done)
+
   return (
     <div className="app-container">
       <h1 className="app-title">TODO-LIST</h1>
       {/* 이론 2챕터 Props: 부모 → 자식으로 데이터와 함수 전달 */}
       <UserProfile />
       <TextInput onAdd={addTodo} />
+
+      {/* 업무별 섹션 */}
       <div className="todo-section">
         <div className="todo-section-header">
           <h2 className="todo-section-title">업무별 todo-list</h2>
@@ -69,6 +78,15 @@ function App() {
         </div>
         <FilterBar todos={todos} activeCategory={activeCategory} onFilter={setActiveCategory} />
         <TaskList todos={sortedTodos} onToggle={toggleTodo} onDelete={deleteTodo} onUpdate={updateTodo} />
+      </div>
+
+      {/* 상태별 섹션 */}
+      <div className="todo-section">
+        <div className="todo-section-header">
+          <h2 className="todo-section-title">상태별 todo-list</h2>
+        </div>
+        <StatusFilter todos={todos} activeStatus={activeStatus} onFilter={setActiveStatus} />
+        <TaskList todos={statusFilteredTodos} onToggle={toggleTodo} onDelete={deleteTodo} onUpdate={updateTodo} />
       </div>
     </div>
   )

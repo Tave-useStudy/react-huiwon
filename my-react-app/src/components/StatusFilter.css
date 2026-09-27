@@ -1,0 +1,47 @@
+.status-filter {
+  display: flex;
+  margin-bottom: 16px;
+  border-bottom: 1.5px solid var(--neutral-200);
+}
+
+.status-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1.5px solid transparent;
+  margin-bottom: -1.5px;
+  background: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--neutral-400);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.status-tab:hover {
+  color: var(--neutral-600);
+}
+
+.status-tab.active {
+  color: var(--blue-600);
+  font-weight: 700;
+  border-bottom-color: var(--blue-600);
+}
+
+.status-count {
+  background: var(--neutral-100);
+  color: var(--neutral-400);
+  border-radius: 999px;
+  padding: 1px 7px;
+  font-size: 11px;
+  font-weight: 600;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.status-tab.active .status-count {
+  background: var(--blue-100);
+  color: var(--blue-600);
+}
