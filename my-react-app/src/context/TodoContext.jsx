@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from 'react'
+import { useLocalStorage } from '../hooks/useLocalStorage'
 
 const TodoContext = createContext(null)
 
@@ -24,20 +25,12 @@ function todoReducer(state, action) {
   }
 }
 
-function loadTodos() {
-  try {
-    const saved = localStorage.getItem('todos')
-    return saved ? JSON.parse(saved) : []
-  } catch {
-    return []
-  }
-}
-
 export function TodoProvider({ children }) {
-  const [todos, dispatch] = useReducer(todoReducer, null, loadTodos)
+  const [load, save] = useLocalStorage('todos', [])
+  const [todos, dispatch] = useReducer(todoReducer, null, load)
 
   useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos))
+    save(todos)
   }, [todos])
 
   const addTodo = (text, category, priority) =>
