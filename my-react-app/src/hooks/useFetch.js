@@ -1,9 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 export function useFetch(url) {
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [retryCount, setRetryCount] = useState(0)
+
+  const refetch = useCallback(() => {
+    setError(null)
+    setRetryCount(c => c + 1)
+  }, [])
 
   useEffect(() => {
     const controller = new AbortController()
@@ -25,7 +31,7 @@ export function useFetch(url) {
       })
 
     return () => controller.abort()
-  }, [url])
+  }, [url, retryCount])
 
-  return { data, loading, error }
+  return { data, loading, error, refetch }
 }

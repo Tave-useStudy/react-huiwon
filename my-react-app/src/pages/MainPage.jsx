@@ -6,6 +6,7 @@ import UserProfile from '../components/UserProfile'
 import FilterBar from '../components/FilterBar'
 import SortBar from '../components/SortBar'
 import StatusFilter from '../components/StatusFilter'
+import FetchStatus from '../components/FetchStatus'
 import { ALL } from '../constants/categories'
 import { PRIORITIES } from '../constants/priorities'
 
@@ -13,7 +14,7 @@ const getPriorityOrder = (value) =>
   PRIORITIES.find(p => p.value === value)?.order ?? 0
 
 function MainPage() {
-  const { todos, addTodo, toggleTodo, deleteTodo, updateTodo } = useTodos()
+  const { todos, loading, error, refetch, addTodo, toggleTodo, deleteTodo, updateTodo } = useTodos()
 
   const [activeCategory, setActiveCategory] = useState(ALL)
   const [sortBy, setSortBy] = useState('newest')
@@ -43,6 +44,11 @@ function MainPage() {
       <h1 className="app-title">📝</h1>
       <UserProfile />
       <TextInput onAdd={addTodo} />
+
+      {/* 초기 로딩 중이거나 에러난 경우 (로컬에 데이터 없을 때만) */}
+      {todos.length === 0 && (
+        <FetchStatus loading={loading} error={error} onRetry={refetch} />
+      )}
 
       {/* 업무별 섹션 */}
       <div className="todo-section">

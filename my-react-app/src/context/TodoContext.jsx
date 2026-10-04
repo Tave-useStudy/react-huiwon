@@ -46,7 +46,7 @@ export function TodoProvider({ children }) {
   const [load, save] = useLocalStorage('todos', [])
   const [todos, dispatch] = useReducer(todoReducer, null, load)
 
-  const { data, loading, error } = useFetch(API_URL)
+  const { data, loading, error, refetch } = useFetch(API_URL)
 
   // localStorage가 비어있을 때만 API 데이터로 초기화
   useEffect(() => {
@@ -75,7 +75,7 @@ export function TodoProvider({ children }) {
   const getTodoById = (id) => todos.find(t => t.id === Number(id))
 
   return (
-    <TodoContext.Provider value={{ todos, loading, error, addTodo, toggleTodo, deleteTodo, updateTodo, getTodoById }}>
+    <TodoContext.Provider value={{ todos, loading, error, refetch, addTodo, toggleTodo, deleteTodo, updateTodo, getTodoById }}>
       {children}
     </TodoContext.Provider>
   )
