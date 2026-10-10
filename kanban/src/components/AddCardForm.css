@@ -1,0 +1,15 @@
+.add-card-form {
+  display: flex;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.add-card-input {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 14px;
+}

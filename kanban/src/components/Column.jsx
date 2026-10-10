@@ -1,7 +1,9 @@
+import AddCardForm from './AddCardForm'
 import Card from './Card'
 import './Column.css'
 
-function Column({ title, cards }) {
+// onDelete, onMove는 Column에서 쓰지 않고 Card로 전달만 함 (props drilling)
+function Column({ title, cards, onAdd, onDelete, onMove }) {
   return (
     <section className="column">
       <header className="column-header">
@@ -14,10 +16,12 @@ function Column({ title, cards }) {
       ) : (
         <ul className="card-list">
           {cards.map((card) => (
-            <Card key={card.id} card={card} />
+            <Card key={card.id} card={card} onDelete={onDelete} onMove={onMove} />
           ))}
         </ul>
       )}
+
+      <AddCardForm onAdd={onAdd} />
     </section>
   )
 }

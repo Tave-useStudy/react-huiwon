@@ -16,3 +16,13 @@
   font-size: 13px;
   color: #666;
 }
+
+.card-actions {
+  display: flex;
+  gap: 4px;
+  margin-top: 10px;
+}
+
+.card-actions .danger {
+  margin-left: auto;
+}
