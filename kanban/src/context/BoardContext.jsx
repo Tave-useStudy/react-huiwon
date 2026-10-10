@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useState } from 'react'
+import { createContext, useContext, useReducer } from 'react'
 import { COLUMNS } from '../constants/columns'
 import { INITIAL_CARDS } from '../constants/initialCards'
 
@@ -33,8 +33,6 @@ function boardReducer(state, action) {
 
 export function BoardProvider({ children }) {
   const [cards, dispatch] = useReducer(boardReducer, INITIAL_CARDS)
-  // 모달로 열린 카드의 id (null이면 닫힘)
-  const [selectedCardId, setSelectedCardId] = useState(null)
 
   // reducer는 순수해야 하므로 id는 바깥에서 만들어서 넘김
   const addCard = (status, title) =>
@@ -51,27 +49,14 @@ export function BoardProvider({ children }) {
   // changes: { title, description } 중 바꿀 값만
   const updateCard = (id, changes) => dispatch({ type: ACTION.UPDATE, id, changes })
 
-  const openCard = (id) => setSelectedCardId(id)
-  const closeCard = () => setSelectedCardId(null)
-
-  // 열린 카드가 삭제되면 undefined → 모달이 자동으로 닫힘
-  const selectedCard = cards.find((card) => card.id === selectedCardId)
-
   const getCardsByStatus = (status) => cards.filter((card) => card.status === status)
+
+  // useParams는 항상 문자열을 주므로 숫자 id(더미 데이터)와도 비교되게 문자열로 맞춤
+  const getCardById = (id) => cards.find((card) => String(card.id) === id)
 
   return (
     <BoardContext.Provider
-      value={{
-        cards,
-        addCard,
-        deleteCard,
-        moveCard,
-        updateCard,
-        getCardsByStatus,
-        selectedCard,
-        openCard,
-        closeCard,
-      }}
+      value={{ cards, addCard, deleteCard, moveCard, updateCard, getCardsByStatus, getCardById }}
     >
       {children}
     </BoardContext.Provider>

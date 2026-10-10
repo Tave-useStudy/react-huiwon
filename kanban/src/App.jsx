@@ -1,22 +1,27 @@
-import Board from './components/Board'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import CardDetailModal from './components/CardDetailModal'
-import KanbanColumn from './components/KanbanColumn'
-import { COLUMNS } from './constants/columns'
+import Navbar from './components/Navbar'
 import { BoardProvider } from './context/BoardContext'
+import BoardPage from './pages/BoardPage'
+import NotFoundPage from './pages/NotFoundPage'
+import StatsPage from './pages/StatsPage'
 import './App.css'
 
 function App() {
   return (
     <BoardProvider>
-      <main className="app">
-        <h1 className="app-title">Kanban Board</h1>
-        <Board>
-          {COLUMNS.map((column) => (
-            <KanbanColumn key={column.id} column={column} />
-          ))}
-        </Board>
-      </main>
-      <CardDetailModal />
+      <BrowserRouter>
+        <Navbar />
+        <main className="app">
+          <Routes>
+            <Route path="/" element={<BoardPage />}>
+              <Route path="cards/:id" element={<CardDetailModal />} />
+            </Route>
+            <Route path="/stats" element={<StatsPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </main>
+      </BrowserRouter>
     </BoardProvider>
   )
 }

@@ -1,22 +1,27 @@
 import { useState } from 'react'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { COLUMNS } from '../constants/columns'
 import { useBoard } from '../context/BoardContext'
 import Modal from './Modal'
 import './CardDetailModal.css'
 
+// /cards/:id 라우트에서 렌더링 — 어떤 카드를 열지는 URL이 결정
 function CardDetailModal() {
-  const { selectedCard, closeCard, updateCard, deleteCard } = useBoard()
+  const { id } = useParams()
+  const navigate = useNavigate()
+  const { getCardById, updateCard, deleteCard } = useBoard()
   const [isEditing, setIsEditing] = useState(false)
   const [draft, setDraft] = useState({ title: '', description: '' })
 
-  if (!selectedCard) return null
+  const selectedCard = getCardById(id)
+
+  // 없는 카드(잘못된 주소, 삭제된 카드)면 보드로 돌려보냄
+  if (!selectedCard) return <Navigate to="/" replace />
 
   const statusTitle = COLUMNS.find((column) => column.id === selectedCard.status)?.title
 
-  const handleClose = () => {
-    setIsEditing(false)
-    closeCard()
-  }
+  // URL이 바뀌면 이 컴포넌트가 언마운트되므로 isEditing은 따로 초기화하지 않아도 됨
+  const handleClose = () => navigate('/')
 
   // 수정 시작할 때 현재 값으로 입력창을 채움
   const handleEdit = () => {
