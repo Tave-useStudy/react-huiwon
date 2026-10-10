@@ -1,44 +1,38 @@
-import { ChevronLeft, ChevronRight, Trash2 } from 'lucide-react'
-import { COLUMNS } from '../constants/columns'
 import './Card.css'
 
-function Card({ card, onDelete, onMove }) {
-  const columnIndex = COLUMNS.findIndex((column) => column.id === card.status)
-  const isFirst = columnIndex === 0
-  const isLast = columnIndex === COLUMNS.length - 1
+function Card({ children }) {
+  return <li className="card">{children}</li>
+}
 
+function CardTitle({ children }) {
+  return <h3 className="card-title">{children}</h3>
+}
+
+function CardDescription({ children }) {
+  if (!children) return null
+  return <p className="card-description">{children}</p>
+}
+
+function CardActions({ children }) {
+  return <div className="card-actions">{children}</div>
+}
+
+function CardAction({ label, onClick, disabled, variant, children }) {
   return (
-    <li className="card">
-      <h3 className="card-title">{card.title}</h3>
-      {card.description && <p className="card-description">{card.description}</p>}
-
-      <div className="card-actions">
-        <button
-          className="icon-btn"
-          onClick={() => onMove(card.id, -1)}
-          disabled={isFirst}
-          aria-label="이전 단계로 이동"
-        >
-          <ChevronLeft size={16} />
-        </button>
-        <button
-          className="icon-btn"
-          onClick={() => onMove(card.id, 1)}
-          disabled={isLast}
-          aria-label="다음 단계로 이동"
-        >
-          <ChevronRight size={16} />
-        </button>
-        <button
-          className="icon-btn danger"
-          onClick={() => onDelete(card.id)}
-          aria-label="카드 삭제"
-        >
-          <Trash2 size={16} />
-        </button>
-      </div>
-    </li>
+    <button
+      className={`icon-btn${variant ? ` ${variant}` : ''}`}
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={label}
+    >
+      {children}
+    </button>
   )
 }
+
+Card.Title = CardTitle
+Card.Description = CardDescription
+Card.Actions = CardActions
+Card.Action = CardAction
 
 export default Card
