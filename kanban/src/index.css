@@ -35,3 +35,33 @@ body {
 .icon-btn.danger:hover {
   color: #d93025;
 }
+
+.text-btn {
+  padding: 6px 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+  color: #333;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.text-btn:hover {
+  background: #f0f1f4;
+}
+
+.text-btn.primary {
+  border-color: #2f6fed;
+  background: #2f6fed;
+  color: #fff;
+}
+
+.text-btn.primary:hover {
+  background: #2459c7;
+}
+
+.text-btn.danger {
+  margin-right: auto;
+  color: #d93025;
+}

@@ -5,11 +5,11 @@ import Card from './Card'
 
 // 필요한 함수를 props가 아닌 Context에서 직접 꺼내 씀
 function KanbanCard({ card }) {
-  const { moveCard, deleteCard } = useBoard()
+  const { moveCard, deleteCard, openCard } = useBoard()
   const columnIndex = COLUMNS.findIndex((column) => column.id === card.status)
 
   return (
-    <Card>
+    <Card onClick={() => openCard(card.id)}>
       <Card.Title>{card.title}</Card.Title>
       <Card.Description>{card.description}</Card.Description>
       <Card.Actions>

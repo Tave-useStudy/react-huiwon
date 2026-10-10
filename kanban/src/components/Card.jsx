@@ -1,7 +1,21 @@
 import './Card.css'
 
-function Card({ children }) {
-  return <li className="card">{children}</li>
+function Card({ onClick, children }) {
+  // onClick이 있으면 카드 전체를 클릭/키보드(Enter)로 열 수 있게 함
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') onClick()
+  }
+
+  return (
+    <li
+      className={`card${onClick ? ' clickable' : ''}`}
+      onClick={onClick}
+      onKeyDown={onClick ? handleKeyDown : undefined}
+      tabIndex={onClick ? 0 : undefined}
+    >
+      {children}
+    </li>
+  )
 }
 
 function CardTitle({ children }) {
@@ -18,10 +32,17 @@ function CardActions({ children }) {
 }
 
 function CardAction({ label, onClick, disabled, variant, children }) {
+  // 버튼 클릭이 카드 클릭(모달 열기)으로 번지지 않게 막음
+  const handleClick = (e) => {
+    e.stopPropagation()
+    onClick()
+  }
+
   return (
     <button
       className={`icon-btn${variant ? ` ${variant}` : ''}`}
-      onClick={onClick}
+      onClick={handleClick}
+      onKeyDown={(e) => e.stopPropagation()}
       disabled={disabled}
       aria-label={label}
     >

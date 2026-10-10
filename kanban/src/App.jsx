@@ -1,4 +1,5 @@
 import Board from './components/Board'
+import CardDetailModal from './components/CardDetailModal'
 import KanbanColumn from './components/KanbanColumn'
 import { COLUMNS } from './constants/columns'
 import { BoardProvider } from './context/BoardContext'
@@ -15,6 +16,7 @@ function App() {
           ))}
         </Board>
       </main>
+      <CardDetailModal />
     </BoardProvider>
   )
 }
