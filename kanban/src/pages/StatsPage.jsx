@@ -1,11 +1,12 @@
 import { COLUMNS } from '../constants/columns'
-import { useBoard } from '../context/BoardContext'
+import { useBoardStore } from '../store/useBoardStore'
 import './StatsPage.css'
 
 function StatsPage() {
-  const { cards, getCardsByStatus } = useBoard()
+  const cards = useBoardStore((state) => state.cards)
+  const countByStatus = (status) => cards.filter((card) => card.status === status).length
   const total = cards.length
-  const doneCount = getCardsByStatus('done').length
+  const doneCount = countByStatus('done')
   const progress = total === 0 ? 0 : Math.round((doneCount / total) * 100)
 
   return (
@@ -29,7 +30,7 @@ function StatsPage() {
         {COLUMNS.map((column) => (
           <li key={column.id} className="stats-item">
             <span className="stats-item-label">{column.title}</span>
-            <strong className="stats-item-count">{getCardsByStatus(column.id).length}</strong>
+            <strong className="stats-item-count">{countByStatus(column.id)}</strong>
           </li>
         ))}
       </ul>

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { COLUMNS } from '../constants/columns'
-import { useBoard } from '../context/BoardContext'
+import { useBoardStore } from '../store/useBoardStore'
 import Modal from './Modal'
 import './CardDetailModal.css'
 
@@ -9,11 +9,12 @@ import './CardDetailModal.css'
 function CardDetailModal() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { getCardById, updateCard, deleteCard } = useBoard()
+  // useParams는 항상 문자열을 주므로 숫자 id(더미 데이터)와도 비교되게 문자열로 맞춤
+  const selectedCard = useBoardStore((state) => state.cards.find((card) => String(card.id) === id))
+  const updateCard = useBoardStore((state) => state.updateCard)
+  const deleteCard = useBoardStore((state) => state.deleteCard)
   const [isEditing, setIsEditing] = useState(false)
   const [draft, setDraft] = useState({ title: '', description: '' })
-
-  const selectedCard = getCardById(id)
 
   // 없는 카드(잘못된 주소, 삭제된 카드)면 보드로 돌려보냄
   if (!selectedCard) return <Navigate to="/" replace />

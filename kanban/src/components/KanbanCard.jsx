@@ -1,13 +1,14 @@
 import { ChevronLeft, ChevronRight, Trash2 } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
-import { useBoard } from '../context/BoardContext'
 import { COLUMNS } from '../constants/columns'
+import { useBoardStore } from '../store/useBoardStore'
 import Card from './Card'
 
-// 필요한 함수를 props가 아닌 Context에서 직접 꺼내 씀
+// 필요한 함수만 store에서 골라 씀 — 함수는 바뀌지 않으므로 이 구독 때문에 리렌더되지 않음
 function KanbanCard({ card }) {
   const navigate = useNavigate()
-  const { moveCard, deleteCard } = useBoard()
+  const moveCard = useBoardStore((state) => state.moveCard)
+  const deleteCard = useBoardStore((state) => state.deleteCard)
   const columnIndex = COLUMNS.findIndex((column) => column.id === card.status)
 
   return (
