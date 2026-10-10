@@ -1,0 +1,43 @@
+.column {
+  padding: 16px;
+  border-radius: 12px;
+  background: #ebecf0;
+}
+
+.column-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.column-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.column-count {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #d4d6dc;
+  font-size: 12px;
+  color: #444;
+}
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.column-empty {
+  margin: 0;
+  padding: 24px 0;
+  text-align: center;
+  font-size: 14px;
+  color: #888;
+}
