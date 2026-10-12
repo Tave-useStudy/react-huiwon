@@ -1,11 +1,13 @@
 import { ChevronLeft, ChevronRight, Trash2 } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { COLUMNS } from '../constants/columns'
+import { useRenderCount } from '../hooks/useRenderCount'
 import { useBoardStore } from '../store/useBoardStore'
 import Card from './Card'
 
 // 필요한 함수만 store에서 골라 씀 — 함수는 바뀌지 않으므로 이 구독 때문에 리렌더되지 않음
 function KanbanCard({ card }) {
+  const renderCount = useRenderCount()
   const navigate = useNavigate()
   const moveCard = useBoardStore((state) => state.moveCard)
   const deleteCard = useBoardStore((state) => state.deleteCard)
@@ -13,7 +15,10 @@ function KanbanCard({ card }) {
 
   return (
     <Card onClick={() => navigate(`/cards/${card.id}`)}>
-      <Card.Title>{card.title}</Card.Title>
+      <Card.Title>
+        {card.title}
+        {import.meta.env.DEV && <span className="render-badge">{renderCount}</span>}
+      </Card.Title>
       <Card.Description>{card.description}</Card.Description>
       <Card.Actions>
         <Card.Action
