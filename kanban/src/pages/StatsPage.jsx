@@ -1,12 +1,19 @@
+import { useMemo } from 'react'
 import { COLUMNS } from '../constants/columns'
 import { useBoardStore } from '../store/useBoardStore'
 import './StatsPage.css'
 
 function StatsPage() {
   const cards = useBoardStore((state) => state.cards)
-  const countByStatus = (status) => cards.filter((card) => card.status === status).length
+
+  // cards 배열이 바뀔 때만 재계산 — 렌더마다 filter를 컬럼 수만큼 반복하지 않도록
+  const counts = useMemo(
+    () => Object.fromEntries(COLUMNS.map((col) => [col.id, cards.filter((c) => c.status === col.id).length])),
+    [cards],
+  )
+
   const total = cards.length
-  const doneCount = countByStatus('done')
+  const doneCount = counts['done'] ?? 0
   const progress = total === 0 ? 0 : Math.round((doneCount / total) * 100)
 
   return (
@@ -30,7 +37,7 @@ function StatsPage() {
         {COLUMNS.map((column) => (
           <li key={column.id} className="stats-item">
             <span className="stats-item-label">{column.title}</span>
-            <strong className="stats-item-count">{countByStatus(column.id)}</strong>
+            <strong className="stats-item-count">{counts[column.id] ?? 0}</strong>
           </li>
         ))}
       </ul>

@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { ChevronLeft, ChevronRight, Trash2 } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { COLUMNS } from '../constants/columns'
@@ -5,8 +6,9 @@ import { useRenderCount } from '../hooks/useRenderCount'
 import { useBoardStore } from '../store/useBoardStore'
 import Card from './Card'
 
-// 필요한 함수만 store에서 골라 씀 — 함수는 바뀌지 않으므로 이 구독 때문에 리렌더되지 않음
-function KanbanCard({ card }) {
+// memo: card prop이 같으면 리렌더 건너뜀
+// Zustand는 변경되지 않은 카드 객체의 참조를 유지하므로 얕은 비교만으로 충분
+const KanbanCard = memo(function KanbanCard({ card }) {
   const renderCount = useRenderCount()
   const navigate = useNavigate()
   const moveCard = useBoardStore((state) => state.moveCard)
@@ -41,6 +43,6 @@ function KanbanCard({ card }) {
       </Card.Actions>
     </Card>
   )
-}
+})
 
 export default KanbanCard

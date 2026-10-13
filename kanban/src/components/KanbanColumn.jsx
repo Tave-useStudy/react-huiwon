@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import { useShallow } from 'zustand/react/shallow'
 import { useRenderCount } from '../hooks/useRenderCount'
 import { useBoardStore } from '../store/useBoardStore'
@@ -13,6 +14,13 @@ function KanbanColumn({ column }) {
     useShallow((state) => state.cards.filter((card) => card.status === column.id)),
   )
   const addCard = useBoardStore((state) => state.addCard)
+
+  // useCallback: column.id / addCard가 바뀌지 않으면 같은 함수 참조 유지
+  // → memo(AddCardForm)이 onAdd 참조 변화에 반응하지 않도록 방지
+  const handleAdd = useCallback(
+    (title) => addCard(column.id, title),
+    [addCard, column.id],
+  )
 
   return (
     <Column>
@@ -30,7 +38,7 @@ function KanbanColumn({ column }) {
         </Column.List>
       )}
 
-      <AddCardForm onAdd={(title) => addCard(column.id, title)} />
+      <AddCardForm onAdd={handleAdd} />
     </Column>
   )
 }
