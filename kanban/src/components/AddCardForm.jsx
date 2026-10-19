@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { Plus } from 'lucide-react'
 import './AddCardForm.css'
 
-function AddCardForm({ onAdd }) {
+// memo: useCallback으로 안정화된 onAdd 참조 덕분에 카드 추가/이동 시 리렌더 건너뜀
+const AddCardForm = memo(function AddCardForm({ onAdd }) {
   const [title, setTitle] = useState('')
 
   const handleSubmit = (e) => {
@@ -26,6 +27,6 @@ function AddCardForm({ onAdd }) {
       </button>
     </form>
   )
-}
+})
 
 export default AddCardForm

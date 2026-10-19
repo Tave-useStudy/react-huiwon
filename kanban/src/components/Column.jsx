@@ -4,11 +4,12 @@ function Column({ children }) {
   return <section className="column">{children}</section>
 }
 
-function ColumnHeader({ title, count }) {
+function ColumnHeader({ title, count, children }) {
   return (
     <header className="column-header">
       <h2 className="column-title">{title}</h2>
       <span className="column-count">{count}</span>
+      {children}
     </header>
   )
 }

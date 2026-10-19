@@ -4,6 +4,26 @@
   box-sizing: border-box;
 }
 
+/* 개발 전용 — 렌더 횟수 배지 */
+.render-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 5px;
+  border-radius: 999px;
+  background: #ef4444;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  vertical-align: middle;
+  line-height: 1.6;
+  font-family: monospace;
+}
+
+.column-render-badge {
+  background: #8b5cf6;
+  margin-left: auto;
+}
+
 body {
   margin: 0;
   font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif;
