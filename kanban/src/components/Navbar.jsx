@@ -1,5 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom'
 import { ChartColumn, LayoutDashboard } from 'lucide-react'
+import { preloadBoardPage, preloadStatsPage } from '../App'
 import './Navbar.css'
 
 function Navbar() {
@@ -12,11 +13,20 @@ function Navbar() {
       <div className="navbar-inner">
         <span className="navbar-logo">KANBAN</span>
         <div className="navbar-links">
-          <NavLink to="/" className={`nav-link${isBoardActive ? ' active' : ''}`}>
+          {/* onMouseEnter로 hover 시점에 번들 사전 로드 */}
+          <NavLink
+            to="/"
+            className={`nav-link${isBoardActive ? ' active' : ''}`}
+            onMouseEnter={preloadBoardPage}
+          >
             <LayoutDashboard size={18} />
             보드
           </NavLink>
-          <NavLink to="/stats" className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>
+          <NavLink
+            to="/stats"
+            className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
+            onMouseEnter={preloadStatsPage}
+          >
             <ChartColumn size={18} />
             통계
           </NavLink>
